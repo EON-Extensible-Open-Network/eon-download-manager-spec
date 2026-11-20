@@ -1,0 +1,21 @@
+{
+  "handoff": 0,
+  "kind": "download",
+  "source": {
+    "browser": "firefox",
+    "extension": "0.0.0"
+  },
+  "start": "ask",
+  "items": [
+    {
+      "url": "https://releases.ubuntu.com/24.04/ubuntu-24.04-desktop-amd64.iso",
+      "final_url": "https://mirror.example.org/ubuntu-24.04-desktop-amd64.iso",
+      "referrer": "https://ubuntu.com/download/desktop",
+      "file_name": "ubuntu-24.04-desktop-amd64.iso",
+      "mime": "application/x-iso9660-image",
+      "size": 6114656256,
+      "cookies": "session=abc123",
+      "user_agent": "Mozilla/5.0"
+    }
+  ]
+}

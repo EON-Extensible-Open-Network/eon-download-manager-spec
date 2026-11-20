@@ -1,0 +1,8 @@
+{
+  "handoff": 0,
+  "kind": "ping",
+  "source": {
+    "browser": "chrome",
+    "extension": "0.0.0"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "handoff": 0,
+  "kind": "media",
+  "items": [
+    {
+      "url": "https://cdn.example.org/v/master.m3u8",
+      "page_title": "A talk about rivers",
+      "media": {
+        "type": "hls",
+        "label": "Video stream"
+      }
+    }
+  ]
+}

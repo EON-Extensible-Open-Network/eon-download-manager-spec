@@ -1,0 +1,25 @@
+{
+  "eondl": 0,
+  "url": "https://example.org/big.iso",
+  "final_url": "https://cdn.example.org/big.iso",
+  "file": "big.iso",
+  "length": 1048576000,
+  "resumable": true,
+  "validators": {
+    "etag": "\"5f1e-a\"",
+    "last_modified": "Wed, 18 Nov 2026 10:00:00 GMT"
+  },
+  "segments": [
+    {
+      "start": 0,
+      "pos": 262144000,
+      "end": 524288000
+    },
+    {
+      "start": 524288000,
+      "pos": 600000000,
+      "end": 1048576000
+    }
+  ],
+  "saved": "2026-11-20T09:30:00Z"
+}

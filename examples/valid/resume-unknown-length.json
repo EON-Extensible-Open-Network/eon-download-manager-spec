@@ -1,0 +1,8 @@
+{
+  "eondl": 0,
+  "url": "https://example.org/stream",
+  "file": "stream.bin",
+  "length": null,
+  "resumable": false,
+  "segments": []
+}

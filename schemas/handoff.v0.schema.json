@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/EON-Extensible-Open-Network/eon-download-manager-spec/schemas/handoff.v0.schema.json",
+  "title": "EON Download Manager hand-off, version 0",
+  "description": "One message from a browser extension (or any program) to EON Download Manager over native messaging. See docs/handoff.md.",
+  "type": "object",
+  "required": ["handoff", "kind"],
+  "additionalProperties": false,
+  "properties": {
+    "handoff": { "const": 0, "description": "Format version. v0 is unstable." },
+    "kind": {
+      "enum": ["ping", "download", "links", "media", "refresh"],
+      "description": "ping: is the application there? download: a download the browser was about to start. links: links a person chose (context menu, all links). media: a video or audio stream the page loaded. refresh: a new address for a download already in the list."
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "browser": { "enum": ["chrome", "edge", "firefox", "opera", "brave", "vivaldi", "other"] },
+        "extension": { "type": "string", "maxLength": 32 }
+      }
+    },
+    "start": {
+      "enum": ["ask", "now", "later"],
+      "default": "ask",
+      "description": "ask: show the add sheet. now: start without asking. later: add to the list, stopped."
+    },
+    "items": {
+      "type": "array",
+      "maxItems": 5000,
+      "items": { "$ref": "#/$defs/item" }
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "kind": { "const": "ping" } } },
+      "then": { "not": { "required": ["items"] } },
+      "else": { "required": ["items"], "properties": { "items": { "minItems": 1 } } }
+    },
+    {
+      "if": { "properties": { "kind": { "enum": ["download", "media", "refresh"] } } },
+      "then": { "properties": { "items": { "maxItems": 1 } } }
+    }
+  ],
+  "$defs": {
+    "url": {
+      "type": "string",
+      "maxLength": 16384,
+      "pattern": "^(https?)://[^ ]+$"
+    },
+    "item": {
+      "type": "object",
+      "required": ["url"],
+      "additionalProperties": false,
+      "properties": {
+        "url": { "$ref": "#/$defs/url" },
+        "final_url": { "$ref": "#/$defs/url" },
+        "referrer": { "type": "string", "maxLength": 16384 },
+        "file_name": { "type": "string", "minLength": 1, "maxLength": 255 },
+        "mime": { "type": "string", "maxLength": 255 },
+        "size": { "type": "integer", "minimum": 0 },
+        "cookies": {
+          "type": "string",
+          "maxLength": 65536,
+          "description": "The Cookie header the browser would send to url, and only that."
+        },
+        "user_agent": { "type": "string", "maxLength": 1024 },
+        "page_title": { "type": "string", "maxLength": 1024 },
+        "media": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type"],
+          "properties": {
+            "type": { "enum": ["hls", "file"] },
+            "label": { "type": "string", "maxLength": 128 }
+          }
+        },
+        "replaces": {
+          "type": "string",
+          "pattern": "^[a-z0-9]{1,64}$",
+          "description": "refresh only: the id of the download whose address this replaces."
+        }
+      }
+    }
+  }
+}

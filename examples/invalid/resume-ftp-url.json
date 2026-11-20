@@ -1,0 +1,8 @@
+{
+  "eondl": 0,
+  "url": "ftp://example.org/a",
+  "file": "a",
+  "length": 10,
+  "resumable": true,
+  "segments": []
+}

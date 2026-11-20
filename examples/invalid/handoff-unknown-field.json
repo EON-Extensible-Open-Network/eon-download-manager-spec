@@ -1,0 +1,10 @@
+{
+  "handoff": 0,
+  "kind": "links",
+  "items": [
+    {
+      "url": "https://example.org/a",
+      "password": "x"
+    }
+  ]
+}

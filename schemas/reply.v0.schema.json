@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/EON-Extensible-Open-Network/eon-download-manager-spec/schemas/reply.v0.schema.json",
+  "title": "EON Download Manager hand-off reply, version 0",
+  "description": "The one message the application writes back before the native host exits.",
+  "type": "object",
+  "required": ["ok"],
+  "additionalProperties": false,
+  "properties": {
+    "ok": { "type": "boolean" },
+    "version": { "type": "string", "maxLength": 32 },
+    "error": {
+      "type": "object",
+      "required": ["code", "message"],
+      "additionalProperties": false,
+      "properties": {
+        "code": { "enum": ["invalid", "too_large", "unavailable", "internal"] },
+        "message": { "type": "string", "maxLength": 1024 }
+      }
+    }
+  },
+  "if": { "properties": { "ok": { "const": false } } },
+  "then": { "required": ["error"] },
+  "else": { "not": { "required": ["error"] } }
+}

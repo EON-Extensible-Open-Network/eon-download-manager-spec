@@ -1,0 +1,10 @@
+{
+  "handoff": 0,
+  "kind": "refresh",
+  "items": [
+    {
+      "url": "https://example.org/new-signed-link/file.zip?sig=2",
+      "replaces": "d18c2f0a"
+    }
+  ]
+}

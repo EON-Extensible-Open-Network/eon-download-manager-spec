@@ -1,0 +1,10 @@
+{
+  "handoff": 0,
+  "kind": "refresh",
+  "items": [
+    {
+      "url": "https://example.org/a",
+      "replaces": "../../x"
+    }
+  ]
+}

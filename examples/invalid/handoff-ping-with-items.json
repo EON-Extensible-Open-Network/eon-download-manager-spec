@@ -1,0 +1,9 @@
+{
+  "handoff": 0,
+  "kind": "ping",
+  "items": [
+    {
+      "url": "https://example.org/a"
+    }
+  ]
+}

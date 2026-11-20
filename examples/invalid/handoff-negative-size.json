@@ -1,0 +1,10 @@
+{
+  "handoff": 0,
+  "kind": "download",
+  "items": [
+    {
+      "url": "https://example.org/a",
+      "size": -1
+    }
+  ]
+}

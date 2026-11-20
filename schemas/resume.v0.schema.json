@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/EON-Extensible-Open-Network/eon-download-manager-spec/schemas/resume.v0.schema.json",
+  "title": "EON Download Manager resume state, version 0",
+  "description": "The .eondl file beside a .part file: everything needed to continue the download after a pause, a crash or a power cut. See docs/resume-state.md.",
+  "type": "object",
+  "required": ["eondl", "url", "file", "length", "resumable", "segments"],
+  "additionalProperties": false,
+  "properties": {
+    "eondl": { "const": 0 },
+    "url": { "type": "string", "pattern": "^(https?)://[^ ]+$", "maxLength": 16384 },
+    "final_url": { "type": "string", "pattern": "^(https?)://[^ ]+$", "maxLength": 16384 },
+    "referrer": { "type": "string", "maxLength": 16384 },
+    "cookies": { "type": "string", "maxLength": 65536 },
+    "user_agent": { "type": "string", "maxLength": 1024 },
+    "file": { "type": "string", "minLength": 1, "maxLength": 255 },
+    "length": {
+      "type": ["integer", "null"],
+      "minimum": 0,
+      "description": "Total bytes, or null when the server did not say."
+    },
+    "resumable": { "type": "boolean", "description": "The server honours byte ranges." },
+    "validators": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "etag": { "type": "string", "maxLength": 1024 },
+        "last_modified": { "type": "string", "maxLength": 128 }
+      }
+    },
+    "segments": {
+      "type": "array",
+      "maxItems": 4096,
+      "items": {
+        "type": "object",
+        "required": ["start", "pos", "end"],
+        "additionalProperties": false,
+        "properties": {
+          "start": { "type": "integer", "minimum": 0 },
+          "pos": { "type": "integer", "minimum": 0, "description": "Next byte to fetch; start <= pos <= end." },
+          "end": { "type": "integer", "minimum": 0, "description": "Exclusive." }
+        }
+      }
+    },
+    "hls": {
+      "type": "object",
+      "required": ["playlist", "done"],
+      "additionalProperties": false,
+      "properties": {
+        "playlist": { "type": "string", "pattern": "^(https?)://[^ ]+$", "maxLength": 16384 },
+        "done": {
+          "type": "array",
+          "items": { "type": "integer", "minimum": 0 },
+          "description": "Indices of media segments already on disk."
+        }
+      }
+    },
+    "saved": { "type": "string", "format": "date-time" }
+  }
+}
