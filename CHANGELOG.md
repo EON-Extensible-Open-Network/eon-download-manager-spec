@@ -5,6 +5,12 @@ SPDX-FileCopyrightText: 2026 EON contributors
 
 # Changelog
 
+## Unreleased
+
+- The application registers the native host at every start rather than on request;
+  *Disconnect* removes it for good. A `ping` is the extension saying hello: the
+  application records which browser, so it can show the extension as connected.
+
 ## 0.0.0 — first contracts
 
 - Browser hand-off over native messaging (`org.eon.download_manager`): `ping`, `download`,

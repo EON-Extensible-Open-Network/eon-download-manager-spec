@@ -21,8 +21,9 @@ The host is named **`org.eon.download_manager`**. Its manifest points at the
 | Chromium, Brave, Vivaldi | the Chromium locations for each |
 | Firefox | Windows: `HKCU\Software\Mozilla\NativeMessagingHosts\…`; Linux: `~/.mozilla/native-messaging-hosts/`; macOS: `~/Library/Application Support/Mozilla/NativeMessagingHosts/` |
 
-The application registers itself **only when the person asks it to** ("Connect
-browsers"), and removes the registration on request. Chromium manifests list the
+The application registers itself **per user, at every start** (no administrator rights;
+renewing it keeps the path right if the program moves), and *Disconnect* removes the
+registration and stops it from coming back. Chromium manifests list the
 extension's origin in `allowed_origins`; Firefox manifests list its id in
 `allowed_extensions`. Nothing else can start the host.
 
