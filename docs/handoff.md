@@ -39,6 +39,13 @@ schema, hands it to the application window — starting it if it is not running 
 writes one reply, then exits. The host never downloads anything itself and never answers
 with data about other downloads.
 
+**`ok: true` means the window has it.** The host answers only once the running window
+has taken the hand-off. If it does not within a short time (a cold start of the window
+included), the host withdraws it and answers `unavailable`, and the extension leaves the
+download to the browser. A download is never cancelled in the browser on the strength of
+a hand-off nobody received. Nothing may rely on a process the host starts outliving it:
+a browser may end every such process when the host exits (Firefox does, on Windows).
+
 ## Messages
 
 `kind` says what the person did:
