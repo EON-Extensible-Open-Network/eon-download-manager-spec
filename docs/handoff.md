@@ -43,8 +43,9 @@ with data about other downloads.
 has taken the hand-off. If it does not within a short time (a cold start of the window
 included), the host withdraws it and answers `unavailable`, and the extension leaves the
 download to the browser. A download is never cancelled in the browser on the strength of
-a hand-off nobody received. Nothing may rely on a process the host starts outliving it:
-a browser may end every such process when the host exits (Firefox does, on Windows).
+a hand-off nobody received. A browser may run the host in a job object (Firefox does,
+on Windows) and end it when the host exits, so the reply must not depend on a process
+the host started finishing the delivery afterwards.
 
 ## Messages
 
